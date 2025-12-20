@@ -1,0 +1,68 @@
+<launch>
+  <!-- Launch Rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ego_planner)/launch/default.rviz" required="true" />
+
+  <!-- Drone 0 -->
+  <node pkg="poscmd_2_odom" name="drone_0_poscmd_2_odom" type="poscmd_2_odom" output="screen">
+        <param name="init_x" value="2.0"/>
+        <param name="init_y" value="0.0"/>
+        <param name="init_z" value="1.0"/>
+        <remap from="~command" to="/drone_0_planning/pos_cmd"/>
+        <remap from="~odometry" to="/drone_0_visual_slam/odom"/>
+  </node>
+  <node pkg="odom_visualization" name="drone_0_odom_visualization" type="odom_visualization" output="screen">
+        <remap from="~odom" to="/drone_0_visual_slam/odom"/>
+        <param name="color/a" value="1.0"/>    
+        <param name="color/r" value="1.0"/>        
+        <param name="color/g" value="0.0"/>        
+        <param name="color/b" value="0.0"/>       
+        <param name="covariance_scale" value="100.0"/>       
+        <param name="robot_scale" value="1.0"/>
+        <param name="tf45" value="false"/>
+        <param name="drone_id" value="0"/>
+  </node>
+
+  <!-- Drone 1 -->
+  <node pkg="poscmd_2_odom" name="drone_1_poscmd_2_odom" type="poscmd_2_odom" output="screen">
+        <param name="init_x" value="-1.0"/>
+        <param name="init_y" value="1.732"/>
+        <param name="init_z" value="1.0"/>
+        <remap from="~command" to="/drone_1_planning/pos_cmd"/>
+        <remap from="~odometry" to="/drone_1_visual_slam/odom"/>
+  </node>
+  <node pkg="odom_visualization" name="drone_1_odom_visualization" type="odom_visualization" output="screen">
+        <remap from="~odom" to="/drone_1_visual_slam/odom"/>
+        <param name="color/a" value="1.0"/>    
+        <param name="color/r" value="0.0"/>        
+        <param name="color/g" value="1.0"/>        
+        <param name="color/b" value="0.0"/>       
+        <param name="covariance_scale" value="100.0"/>       
+        <param name="robot_scale" value="1.0"/>
+        <param name="tf45" value="false"/>
+        <param name="drone_id" value="1"/>
+  </node>
+
+  <!-- Drone 2 -->
+  <node pkg="poscmd_2_odom" name="drone_2_poscmd_2_odom" type="poscmd_2_odom" output="screen">
+        <param name="init_x" value="-1.0"/>
+        <param name="init_y" value="-1.732"/>
+        <param name="init_z" value="1.0"/>
+        <remap from="~command" to="/drone_2_planning/pos_cmd"/>
+        <remap from="~odometry" to="/drone_2_visual_slam/odom"/>
+  </node>
+  <node pkg="odom_visualization" name="drone_2_odom_visualization" type="odom_visualization" output="screen">
+        <remap from="~odom" to="/drone_2_visual_slam/odom"/>
+        <param name="color/a" value="1.0"/>    
+        <param name="color/r" value="0.0"/>        
+        <param name="color/g" value="0.0"/>        
+        <param name="color/b" value="1.0"/>       
+        <param name="covariance_scale" value="100.0"/>       
+        <param name="robot_scale" value="1.0"/>
+        <param name="tf45" value="false"/>
+        <param name="drone_id" value="2"/>
+  </node>
+
+  <!-- Controller Script -->
+  <node pkg="ego_planner" name="swarm_circle_demo_controller" type="swarm_circle_demo.py" output="screen" />
+  
+</launch>

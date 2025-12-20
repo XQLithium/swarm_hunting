@@ -1,0 +1,36 @@
+  - Class: rviz/Group
+    Displays:
+      - Class: rviz/Marker
+        Enabled: true
+        Marker Topic: /drone_0_odom_visualization/robot
+        Name: robot
+        Namespaces:
+          mesh: true
+        Queue Size: 100
+        Value: true
+    Enabled: true
+    Name: drone_0
+  - Class: rviz/Group
+    Displays:
+      - Class: rviz/Marker
+        Enabled: true
+        Marker Topic: /drone_1_odom_visualization/robot
+        Name: robot
+        Namespaces:
+          mesh: true
+        Queue Size: 100
+        Value: true
+    Enabled: true
+    Name: drone_1
+  - Class: rviz/Group
+    Displays:
+      - Class: rviz/Marker
+        Enabled: true
+        Marker Topic: /drone_2_odom_visualization/robot
+        Name: robot
+        Namespaces:
+          mesh: true
+        Queue Size: 100
+        Value: true
+    Enabled: true
+    Name: drone_2

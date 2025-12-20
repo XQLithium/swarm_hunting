@@ -1,0 +1,79 @@
+<launch>
+  <!-- 地图尺寸配置 (用于仿真环境生成) -->
+  <arg name="map_size_x" value="40.0"/>
+  <arg name="map_size_y" value="40.0"/>
+  <arg name="map_size_z" value=" 5.0"/>
+  <arg name="odom_topic" value="visual_slam/odom" />
+
+  <!-- 无人机 0: 目标 (Target) -->
+  <!-- flight_type=1 表示手动目标模式 (监听外部 Goal 话题) -->
+  <include file="$(find ego_planner)/launch/run_in_sim.launch">
+    <arg name="drone_id" value="0"/>
+    <arg name="init_x" value="0.0"/>
+    <arg name="init_y" value="0.0"/>
+    <arg name="init_z" value="1.0"/>
+    <arg name="target_x" value="0.0"/>
+    <arg name="target_y" value="0.0"/>
+    <arg name="target_z" value="1.0"/>
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_topic" value="$(arg odom_topic)"/>
+    <arg name="flight_type" value="1"/>
+  </include>
+
+  <!-- 无人机 1: 拦截者 (Interceptor) -->
+  <include file="$(find ego_planner)/launch/run_in_sim.launch">
+    <arg name="drone_id" value="1"/>
+    <arg name="init_x" value="-5.0"/>
+    <arg name="init_y" value="0.0"/>
+    <arg name="init_z" value="1.0"/>
+    <arg name="target_x" value="-5.0"/>
+    <arg name="target_y" value="0.0"/>
+    <arg name="target_z" value="1.0"/>
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_topic" value="$(arg odom_topic)"/>
+    <arg name="flight_type" value="1"/>
+  </include>
+
+  <!-- 无人机 2: 拦截者 (Interceptor) -->
+  <include file="$(find ego_planner)/launch/run_in_sim.launch">
+    <arg name="drone_id" value="2"/>
+    <arg name="init_x" value="2.5"/>
+    <arg name="init_y" value="4.33"/>
+    <arg name="init_z" value="1.0"/>
+    <arg name="target_x" value="2.5"/>
+    <arg name="target_y" value="4.33"/>
+    <arg name="target_z" value="1.0"/>
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_topic" value="$(arg odom_topic)"/>
+    <arg name="flight_type" value="1"/>
+  </include>
+
+  <!-- 无人机 3: 拦截者 (Interceptor) -->
+  <include file="$(find ego_planner)/launch/run_in_sim.launch">
+    <arg name="drone_id" value="3"/>
+    <arg name="init_x" value="2.5"/>
+    <arg name="init_y" value="-4.33"/>
+    <arg name="init_z" value="1.0"/>
+    <arg name="target_x" value="2.5"/>
+    <arg name="target_y" value="-4.33"/>
+    <arg name="target_z" value="1.0"/>
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_topic" value="$(arg odom_topic)"/>
+    <arg name="flight_type" value="1"/>
+  </include>
+
+  <!-- 启动 AICG 协调器节点 -->
+  <node pkg="ego_planner" type="aicg_coordinator.py" name="aicg_coordinator" output="screen">
+    <!-- 运动模式选项: linear (直线), circle (圆形), parabola (抛物线), sine (正弦) -->
+    <param name="motion_mode" value="circle"/> 
+  </node>
+
+</launch>

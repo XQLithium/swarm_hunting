@@ -164,7 +164,8 @@ add_executable(multi_map_visualization src/multi_map_visualization.cc)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-add_dependencies(multi_map_visualization multi_map_server_messages_cpp)
+# 确保消息生成在编译可执行文件前完成（生成 MultiOccupancyGrid.h 等）
+add_dependencies(multi_map_visualization ${PROJECT_NAME}_generate_messages_cpp ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(multi_map_visualization 
