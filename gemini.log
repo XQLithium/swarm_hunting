@@ -1,0 +1,3 @@
+Session started: Researching drone speed control in ego-planner swarm.
+User goal: Implement constant velocity movement for target and interceptor.
+Current focus: Analyzing codebase to find speed configuration and control mechanisms.

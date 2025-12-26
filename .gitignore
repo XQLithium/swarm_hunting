@@ -12,6 +12,7 @@ summary_MD/reference_paper.pdf
 
 .vscode/        # VS Code 配置 (除非团队强制统一配置，否则建议忽略)
 .cursor/        # Cursor 产生的临时文件 (你之前遇到的那些)
+.agent/         # Agent 配置
 
 __pycache__/
 *.venv

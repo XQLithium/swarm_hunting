@@ -5,7 +5,7 @@
 
 set -e
 
-WS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+WS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 launch_in_terminal() {
   local title="$1"

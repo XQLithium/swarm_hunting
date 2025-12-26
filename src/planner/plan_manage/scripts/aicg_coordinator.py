@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import sys
+sys.path.append('/usr/lib/python3/dist-packages')
 import rospy
 import math
 import numpy as np
@@ -190,7 +192,7 @@ class AICGSwarm:
             w_left  = 1.0 + K_w * np.exp(-(dist_left**2) / (sigma**2))
             
             err = (w_right * gap_right) - (w_left * gap_left)
-            capture_radius
+
             updates[curr_id] = 0.02 * err # 降低步长增益，使轨迹更平滑
 
         # 应用角度更新
@@ -227,8 +229,9 @@ if __name__ == '__main__':
     try:
         rospy.init_node('aicg_coordinator')
         
-        mode = rospy.get_param('~motion_mode', 'circle') 
-        target = TargetMover(drone_id=0, motion_mode=mode, speed=2.0)
+        mode = rospy.get_param('~motion_mode', 'circle')
+        target_speed = rospy.get_param('~target_speed', 2.0)
+        target = TargetMover(drone_id=0, motion_mode=mode, speed=target_speed)
         swarm = AICGSwarm(interceptor_ids=[1, 2, 3], target_id=0)
         
         rospy.loginfo(f"AICG 演示已启动。模式: {mode}")

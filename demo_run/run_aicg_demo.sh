@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-WS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+WS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 launch_in_terminal() {
   local title="$1"
@@ -12,4 +12,4 @@ launch_in_terminal() {
 launch_in_terminal "RViz (AICG demo)" "roslaunch ego_planner rviz.launch"
 # 延迟 5 秒再启动 swarm，避免资源抢占或启动顺序问题
 sleep 5
-launch_in_terminal "AICG Demo (AICG)" "roslaunch ego_planner aicg_demo.launch"
+launch_in_terminal "AICG Demo (AICG)" "roslaunch ego_planner aicg_demo.launch target_speed:=1.5 interceptor_speed:=2.5"
